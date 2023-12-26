@@ -36,12 +36,14 @@ jobs:
         uses: heinrichreimer/action-github-changelog-generator@v2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Build Changelog
-      #   id: github_release
-      #   uses: mikepenz/release-changelog-builder-action@v3
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Create Release
-      #   uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
-      #   with:
-      #     body: ${{steps.github_release.outputs.changelog}}
+      - name: checkout latest tag
+        run: git checkout $(git describe --tags `git rev-list --tags --max-count=1`)
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
+        with:
+          body: ${{steps.github_release.outputs.changelog}}
