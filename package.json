@@ -1,7 +1,6 @@
 {
 	"name": "@svelte.codes/form-manager",
-	"private": true,
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"svelte": "./dist/index.js",
 	"type": "module",
 	"scripts": {
@@ -9,7 +8,8 @@
 		"build": "svelte-kit sync && svelte-package",
 		"build:watch": "nodemon --watch src/**/* --exec \"npm run build\"",
 		"preview": "vite preview",
-		"check": "svelte-check --tsconfig ./tsconfig.json"
+		"check": "svelte-check --tsconfig ./tsconfig.json",
+		"release": "svelte-package && npm version patch && npm publish"
 	},
 	"devDependencies": {
 		"@sveltejs/package": "^2.2.4",
@@ -25,13 +25,12 @@
 		"vite": "^5.0.8",
 		"vite-plugin-dts": "^3.6.4"
 	},
-	"main": "./dist/modal-manager.umd.cjs",
-	"module": "./dist/modal-manager.js",
-	"types": "./dist/modal-manager.d.ts",
+	"main": "./dist/form-manager.js",
+	"module": "./dist/form-manager.js",
+	"types": "./dist/form-manager.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/modal-manager.js",
-			"require": "./dist/modal-manager.umd.cjs"
+			"import": "./dist/index.js"
 		}
 	},
 	"dependencies": {
