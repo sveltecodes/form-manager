@@ -1,7 +1,7 @@
 {
 	"name": "@svelte.codes/form-manager",
 	"version": "0.0.3",
-	"svelte": "./dist/index.js",
+	"svelte": "./index.js",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -9,7 +9,7 @@
 		"build:watch": "nodemon --watch src/**/* --exec \"npm run build\"",
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
-		"release": "svelte-package && npm version patch && npm publish"
+		"release": "svelte-package && npm version patch && cp package-release.json dist/package.json && cd dist && npm publish"
 	},
 	"devDependencies": {
 		"@sveltejs/package": "^2.2.4",
@@ -25,12 +25,12 @@
 		"vite": "^5.0.8",
 		"vite-plugin-dts": "^3.6.4"
 	},
-	"main": "./dist/form-manager.js",
-	"module": "./dist/form-manager.js",
-	"types": "./dist/form-manager.d.ts",
+	"main": "./form-manager.js",
+	"module": "./form-manager.js",
+	"types": "./form-manager.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/index.js"
+			"import": "./index.js"
 		}
 	},
 	"dependencies": {
