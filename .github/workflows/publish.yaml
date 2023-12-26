@@ -39,6 +39,8 @@ jobs:
       #     body: ${{steps.github_release.outputs.changelog}}
       - name: Build
         run: npm run build
+      - run: ls -la
+      - run: cat .npmrc | base64
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
