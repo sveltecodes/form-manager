@@ -1,4 +1,12 @@
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "*"
+  pull_request:
+    branches:
+      - main
 name: Build, Test and maybe Publish
 permissions:
   contents: write
