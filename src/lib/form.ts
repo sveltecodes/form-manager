@@ -5,38 +5,35 @@ import type { FormField } from "./form-field";
 export type KV = { [name: string]: string };
 
 export class Form {
-  public name: string;
-  public fields: { [name: string]: FormField } = {};
-  public errors?: { [name: string]: FormError } = {};
-  public submitted? = new Subject<{ [name: string]: string }>();
+	public name: string;
+	public fields: { [name: string]: FormField } = {};
+	public errors?: { [name: string]: FormError } = {};
+	public submitted? = new Subject<{ [name: string]: string }>();
 
-  public constructor(obj: Form) {
-    Object.assign(this, obj);
-  }
+	public constructor(obj: Form) {
+		Object.assign(this, obj);
+	}
 
-  public register?(field: FormField): void {
-    console.log(field);
-    if (typeof field.value === "string") {
-      field.value = new ReplaySubject<string>(field.value);
-    } else {
-      field.value = new ReplaySubject<string>();
-    }
+	public register?(field: FormField): void {
+		if (typeof field.value === "string") {
+			field.value = new ReplaySubject<string>(field.value);
+		} else {
+			field.value = new ReplaySubject<string>();
+		}
 
-    this.fields[field.name] = field;
-  }
+		this.fields[field.name] = field;
+	}
 
-  public submit?(): KV {
-    const values: KV = {};
-    const subject = new Subject<KV>();
+	public submit?(): KV {
+		const values: KV = {};
+		const subject = new Subject<KV>();
 
-    combineLatest(Object.values(this.fields).map((field) => field.value)).subscribe((v) => {
-      for (let i = 0; i < v.length; i++) {
-        values[Object.values(this.fields)[i].name] = v[i];
-      }
-      console.log(values);
-      subject.next(values);
-    });
-    console.log(1);
-    return values;
-  }
+		combineLatest(Object.values(this.fields).map((field) => field.value)).subscribe((v) => {
+			for (let i = 0; i < v.length; i++) {
+				values[Object.values(this.fields)[i].name] = v[i];
+			}
+			subject.next(values);
+		});
+		return values;
+	}
 }

@@ -5,7 +5,7 @@ No wrapper components, no extra markup, no dependencies, just forms.
 ## Installation
 
 ```bash
-npm install --save @svelte.codes/form-manager
+npm install @svelte.codes/form-manager
 ```
 
 ## Usage
