@@ -1,6 +1,6 @@
 {
 	"name": "@svelte.codes/form-manager",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"svelte": "./index.js",
 	"type": "module",
 	"main": "./index.js",
@@ -9,9 +9,6 @@
 	"exports": {
 		".": {
 			"import": "./index.js"
-		},
-		"form-container.svelte": {
-			"import": "./form-container.svelte"
 		}
 	},
 	"peerDependencies": {
