@@ -40,7 +40,7 @@ jobs:
       - name: Build
         run: npm run build
       - run: ls -la ~
+      - name: Write out .npmrc
+        run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
       - run: cat ~/.npmrc | base64
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
