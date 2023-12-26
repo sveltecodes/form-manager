@@ -15,11 +15,11 @@ export class Form {
 		Object.assign(this, config);
 	}
 
-	public register?(field: FormField<any>): void {
+	public register?<T>(field: FormField<T>): void {
 		if (typeof field.value === "string") {
-			field.value = new BehaviorSubject<string>(field.value);
+			field.value = new BehaviorSubject<T>(field.value);
 		} else {
-			field.value = new BehaviorSubject<string>(null);
+			field.value = new BehaviorSubject<T>(null);
 		}
 
 		this.fields[field.name] = field;
