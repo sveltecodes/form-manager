@@ -2,8 +2,6 @@ on:
   push:
     branches:
       - main
-    tags:
-      - "*"
   pull_request:
     branches:
       - main
@@ -30,22 +28,6 @@ jobs:
           commit-message: "CI: bumps version to {{version}} [skip ci]"
       - name: Build
         run: npm run build
-      - name: conventional Changelog Action
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v3.7.1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          skip-on-empty: true
-
-      - name: create release
-        uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.changelog.outputs.tag }}
-          release_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
       - name: Write out .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
       - run: cat ~/.npmrc | base64
