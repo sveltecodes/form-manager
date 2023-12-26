@@ -1,4 +1,4 @@
-import { ReplaySubject, Subject, combineLatest } from "rxjs";
+import { BehaviorSubject, Subject, combineLatest } from "rxjs";
 import type { FormError } from "./form-error";
 import type { FormField } from "./form-field";
 
@@ -16,9 +16,9 @@ export class Form {
 
 	public register?(field: FormField): void {
 		if (typeof field.value === "string") {
-			field.value = new ReplaySubject<string>(field.value);
+			field.value = new BehaviorSubject<string>(field.value);
 		} else {
-			field.value = new ReplaySubject<string>();
+			field.value = new BehaviorSubject<string>(null);
 		}
 
 		this.fields[field.name] = field;

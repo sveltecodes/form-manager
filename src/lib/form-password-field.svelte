@@ -1,12 +1,12 @@
 <script lang="ts">
-  // import { formFieldProxy } from "sveltekit-superforms/client";
-  // import Errors from "./Errors.svelte";
+	// import { formFieldProxy } from "sveltekit-superforms/client";
+	// import Errors from "./Errors.svelte";
 
-  // export let form;
-  // export let name: string;
-  // export let classes: string = "";
+	// export let form;
+	// export let name: string;
+	// export let classes: string = "";
 
-  // const { value, errors } = formFieldProxy(form, name);
+	// const { value, errors } = formFieldProxy(form, name);
 </script>
 
 <!--

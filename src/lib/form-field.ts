@@ -1,4 +1,4 @@
-import type { ReplaySubject } from "rxjs";
+import type { BehaviorSubject, ReplaySubject } from "rxjs";
 import type { FormValidator } from "./form-validator";
 
 export class FormField {
@@ -6,7 +6,7 @@ export class FormField {
 	public label?: string;
 	public placeholder?: string;
 	public type?: string;
-	public value?: ReplaySubject<string>;
+	public value?: BehaviorSubject<string>;
 	public touched?: boolean;
 	public control?: HTMLInputElement;
 	public validators?: FormValidator[];
