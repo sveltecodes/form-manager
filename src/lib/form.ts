@@ -1,4 +1,5 @@
 import { BehaviorSubject, Subject, combineLatest } from "rxjs";
+import type { FormConfig } from "./form-config";
 import type { FormError } from "./form-error";
 import type { FormField } from "./form-field";
 
@@ -10,8 +11,8 @@ export class Form {
 	public errors?: { [name: string]: FormError } = {};
 	public submitted? = new Subject<{ [name: string]: string }>();
 
-	public constructor(obj: Form) {
-		Object.assign(this, obj);
+	public constructor(config: FormConfig) {
+		Object.assign(this, config);
 	}
 
 	public register?(field: FormField): void {
@@ -24,7 +25,7 @@ export class Form {
 		this.fields[field.name] = field;
 	}
 
-	public submit?(): KV {
+	public submit(): KV {
 		const values: KV = {};
 		const subject = new Subject<KV>();
 
