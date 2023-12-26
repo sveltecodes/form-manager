@@ -7,6 +7,7 @@
 		"dev": "vite",
 		"build": "svelte-kit sync && svelte-package",
 		"build:watch": "nodemon --watch src/**/* --exec \"npm run build\"",
+		"package": "svelte-kit package",
 		"preview": "vite preview",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"release": "svelte-package && npm version patch && cp package-release.json dist/package.json && cd dist && npm version patch && npm publish"

@@ -10,8 +10,8 @@
 		".": {
 			"import": "./index.js"
 		},
-		"*": {
-			"import": "./index.js"
+		"form-container.svelte": {
+			"import": "./form-container.svelte"
 		}
 	},
 	"peerDependencies": {
