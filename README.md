@@ -19,7 +19,6 @@ const form = new Form({
   fields: {
     email: {
       name: "email",
-      type: "email",
       label: "Email",
       placeholder: "Email"
     }
