@@ -10,7 +10,7 @@ npm install --save @svelte.codes/form-manager
 
 ## Usage
 
-```typescript
+```ts
 <script lang="ts">
 	import { Form, FormContainer, FormTextField } from "@svelte.codes/form-manager";
 
