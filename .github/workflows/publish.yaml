@@ -36,8 +36,14 @@ jobs:
         uses: heinrichreimer/action-github-changelog-generator@v2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: checkout latest tag
-        run: git checkout $(git describe --tags `git rev-list --tags --max-count=1`)
+      - name: Get latest tag
+        id: latest-tag
+        run: echo "latest-tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_OUTPUT
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.MY_PAT }}
+          ref: ${{ steps.latest-tag.outputs.latest-tag }}
+      - run: echo ${{ steps.latest-tag.outputs.latest-tag }}
       - name: Build Changelog
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v3
