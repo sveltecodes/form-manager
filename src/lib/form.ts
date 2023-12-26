@@ -15,7 +15,7 @@ export class Form {
 		Object.assign(this, config);
 	}
 
-	public register?(field: FormField): void {
+	public register?(field: FormField<any>): void {
 		if (typeof field.value === "string") {
 			field.value = new BehaviorSubject<string>(field.value);
 		} else {
