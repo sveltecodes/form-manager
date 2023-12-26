@@ -13,6 +13,7 @@
 		"release": "svelte-package && npm version patch && cp package-release.json dist/package.json && cd dist && npm version patch && npm publish"
 	},
 	"devDependencies": {
+		"@sveltejs/kit": "^2.0.6",
 		"@sveltejs/package": "^2.2.4",
 		"@sveltejs/vite-plugin-svelte": "^3.0.1",
 		"@tsconfig/svelte": "^5.0.2",
