@@ -1,15 +1,7 @@
 {
 	"name": "@svelte.codes/form-manager",
-<<<<<<< HEAD
-	"version": "0.0.18",
 	"svelte": "./dist/index.js",
-||||||| 4ae06d8
-	"version": "0.0.18",
-	"svelte": "./index.js",
-=======
 	"version": "0.0.19",
-	"svelte": "./index.js",
->>>>>>> 2afec596aa6691dabb85c0506dfd3f357e13e1e3
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
