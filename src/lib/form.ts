@@ -1,7 +1,7 @@
 import { ReplaySubject, Subject, Subscription, combineLatest } from "rxjs";
 import type { FormConfig } from "./form-config";
 import type { FormError } from "./form-error";
-import type { FormField } from "./form-field";
+import { FormField } from "./form-field";
 
 export type KV = { [name: string]: string };
 
@@ -16,27 +16,25 @@ export class Form {
 
 	public constructor(config: FormConfig) {
 		Object.assign(this, config);
+		for (const field in this.fields) {
+			this.fields[field] = new FormField(this.fields[field]);
+		}
 	}
 
-	public register?<T>(field: FormField<T>): void {
-		if (typeof field.value === "string") {
-			field.value = new ReplaySubject<T>(1);
-			field.value.next(field.value as any);
-		} else {
-			field.value = new ReplaySubject<T>(1);
-		}
-		this.fields[field.name] = field;
+	public register?<T>(name: string, control: HTMLInputElement | HTMLSelectElement): void {
+		this.fields[name].control = control;
+		this.fields[name].register(control);
 	}
 
 	public submit(): KV {
 		const values: KV = {};
-		const subject = new Subject<KV>();
-		combineLatest(Object.values(this.fields).map((field) => field.value)).subscribe((v) => {
-			for (let i = 0; i < v.length; i++) {
-				values[Object.values(this.fields)[i].name] = v[i];
-			}
-			subject.next(values);
-		});
+		combineLatest(Object.values(this.fields).map((field) => field.value))
+			.subscribe((v) => {
+				for (let i = 0; i < v.length; i++) {
+					values[Object.values(this.fields)[i].name] = v[i];
+				}
+			})
+			.unsubscribe();
 		return values;
 	}
 }

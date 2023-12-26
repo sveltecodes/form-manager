@@ -1,4 +1,4 @@
-export class FormValidator {
-	public fn: (value: string) => boolean;
+export class FormValidator<T> {
+	public fn: (value: T) => boolean;
 	public message: string;
 }

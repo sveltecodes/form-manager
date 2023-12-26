@@ -1,5 +1,3 @@
-import type { FormField } from "./form-field";
-
-export type FormContextType = {
-  register: (field: FormField) => void;
+export type FormContextType<T> = {
+	register: (name: string, control: HTMLInputElement | HTMLSelectElement) => void;
 };

@@ -7,4 +7,5 @@ export { Form } from "./form";
 export type { FormContextType } from "./form-context";
 export { FormError } from "./form-error";
 export { FormField } from "./form-field";
-export { formEmailValidator } from "./validators/form-email-validator";
+export { email } from "./validators/email";
+export { minLength } from "./validators/min-length";
