@@ -28,19 +28,18 @@ jobs:
         with:
           target-branch: main
           commit-message: "CI: bumps version to {{version}} [skip ci]"
-      # - name: Build Changelog
-      #   id: github_release
-      #   uses: mikepenz/release-changelog-builder-action@v3
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Create Release
-      #   uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
-      #   with:
-      #     body: ${{steps.github_release.outputs.changelog}}
       - name: Build
         run: npm run build
-      - run: ls -la ~
       - name: Write out .npmrc
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
       - run: cat ~/.npmrc | base64
       - run: npm publish
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Release
+        uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
+        with:
+          body: ${{steps.github_release.outputs.changelog}}
