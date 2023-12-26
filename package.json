@@ -1,7 +1,7 @@
 {
 	"name": "@svelte.codes/form-manager",
 	"version": "0.0.18",
-	"svelte": "./index.js",
+	"svelte": "./dist/index.js",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -27,12 +27,12 @@
 		"vite": "^5.0.8",
 		"vite-plugin-dts": "^3.6.4"
 	},
-	"main": "./form-manager.js",
-	"module": "./form-manager.js",
-	"types": "./form-manager.d.ts",
+	"main": "./dist/index.js",
+	"module": "./dist/index.js",
+	"types": "./dist/index.d.ts",
 	"exports": {
 		".": {
-			"import": "./index.js"
+			"import": "./dist/index.js"
 		}
 	},
 	"dependencies": {
