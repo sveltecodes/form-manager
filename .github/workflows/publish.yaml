@@ -31,23 +31,24 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_TOKEN}}" > ~/.npmrc
       - run: cat ~/.npmrc | base64
       - run: npm publish
-      # - name: "✏️ Generate release changelog"
-      #   uses: heinrichreimer/action-github-changelog-generator@v2.3
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Get latest tag
-      #   id: latest-tag
-      #   run: echo "latest-tag=$(git describe --tags `git rev-list --tags --max-count=1`)" >> $GITHUB_OUTPUT
-      # - uses: actions/checkout@v4
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     ref: ${{ steps.latest-tag.outputs.latest-tag }}
-      # - name: Build Changelog
-      #   id: github_release
-      #   uses: mikepenz/release-changelog-builder-action@v3
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # - name: Create Release
-      #   uses: mikepenz/action-gh-release@v0.2.0-a03 #softprops/action-gh-release
-      #   with:
-      #     body: ${{steps.github_release.outputs.changelog}}
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: 🚀 actions succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: 🚨 actions failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+          severity: warn
+          details: actions cancelled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
