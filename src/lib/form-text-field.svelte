@@ -1,32 +1,38 @@
 <script lang="ts">
-  import { getContext, onMount } from "svelte";
-  import type { Form } from "./form";
-  import type { FormContextType } from "./form-context";
-  import FieldError from "./field-error.svelte";
+	import { getContext, onMount } from "svelte";
+	import type { Form } from "./form";
+	import type { FormContextType } from "./form-context";
+	import FieldError from "./field-error.svelte";
+	import type { HTMLInputAttributes } from "svelte/elements";
 
-  export let name: string;
-  export let form: Form;
-  export let value: string = "";
-  export let placeholder: string = "";
-  export let classes: string = "";
+	export { className as class };
 
-  let control: HTMLInputElement;
+	interface $$Props extends HTMLInputAttributes {
+		name: string;
+		manager: Form;
+	}
+	export let name: $$Props["name"];
+	export let manager: $$Props["manager"];
+	export let value: string = "";
+	export let placeholder: string = "";
 
-  const ctx = getContext<FormContextType<any>>(form.name);
+	let control: HTMLInputElement;
 
-  onMount(() => {
-    ctx.register(name, control);
-  });
+	const ctx = getContext<FormContextType<any>>(manager.name);
 
-  $: errors = form.fields[name].errors;
+	onMount(() => {
+		ctx.register(name, control);
+	});
+
+	$: errors = manager.fields[name].errors;
 </script>
 
 <input
-  bind:this={control}
-  bind:value
-  {name}
-  {...$$restProps}
-  {placeholder}
-  class="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 {classes}"
+	{...$$props}
+	bind:this={control}
+	bind:value
+	{name}
+	{placeholder}
+	class="h-9 rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-foreground file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 {$$props.class}"
 />
 <FieldError {errors} />
