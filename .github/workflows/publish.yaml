@@ -16,7 +16,7 @@ jobs:
           node-version: 20.x
       - run: npm install -g pnpm
       - name: Install Dependencies
-        run: pnpm ci
+        run: pnpm install
       - name:  "Automated Version Bump"
         uses:  "phips28/gh-action-bump-version@master"
         env:
