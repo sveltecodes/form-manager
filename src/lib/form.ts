@@ -25,6 +25,9 @@ export class Form {
 		this.fields[name].control = control;
 		this.fields[name].register(control);
 		this.subscriptions.push(this.fields[name].valid.subscribe((e) => {}));
+		this.fields[name].value.subscribe((v) => {
+			this.values.next(this.submit());
+		});
 	}
 
 	public submit(): KV {
