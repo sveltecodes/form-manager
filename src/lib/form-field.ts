@@ -10,6 +10,7 @@ export class FormField<T> {
 	public control?: HTMLInputElement | HTMLSelectElement;
 	public validators?: FormValidator<T>[] = [];
 	public errors? = new BehaviorSubject<string[]>([]);
+	public valid? = new BehaviorSubject<boolean>(false);
 
 	public constructor(field: FormField<T>) {
 		Object.assign(this, field);
@@ -29,6 +30,7 @@ export class FormField<T> {
 	public validate(value: string): boolean {
 		if (!this.validators) {
 			this.errors.next([]);
+			this.valid.next(true);
 		}
 
 		const errors: string[] = [];
@@ -43,7 +45,10 @@ export class FormField<T> {
 		this.errors.next(errors);
 
 		if (errors.length > 0) {
+			this.valid.next(false);
 			return true;
+		} else {
+			this.valid.next(true);
 		}
 	}
 }
