@@ -41,7 +41,7 @@
 		".": {
 			"import": "./dist/index.js"
 		},
-		"./styles/app.pcss": "./dist/styles/app.pcss"
+		"./styles/app.pcss": "./public/styles/app.pcss"
 	},
 	"dependencies": {
 		"bits-ui": "^0.11.8",
