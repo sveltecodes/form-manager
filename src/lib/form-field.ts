@@ -33,7 +33,7 @@ export class FormField<T> {
 		});
 	}
 
-	public validate(value: string): boolean {
+	public validate?(value: string): boolean {
 		if (!this.validators) {
 			this.errors.next([]);
 			this.valid.next(true);

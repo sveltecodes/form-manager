@@ -5,6 +5,7 @@ export { default as FormErrors } from "./form-errors.svelte";
 export { default as FormPasswordField } from "./form-password-field.svelte";
 export { default as FormTextField } from "./form-text-field.svelte";
 export { default as FormSelect } from "./form-select.svelte";
+export { default as FormSwitch } from "./form-switch.svelte";
 
 export { Form } from "./form";
 export type { FormContextType } from "./form-context";
