@@ -1,7 +1,5 @@
 on:
   push:
-    paths-ignore:
-      - ".github/**"
     branches:
       - main
 name: Build, Test and maybe Publish
