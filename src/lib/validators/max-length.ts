@@ -5,9 +5,9 @@ import type { FormValidator } from "../form-validator";
 // 	message: "Invalid email address"
 // };
 
-export const minLength = (length: number): FormValidator<any> => {
-	return {
-		fn: (value: string) => (value ? value.length <= length : true),
-		message: `must be at most ${length} characters`
-	};
+export const maxLength = (length: number): FormValidator<any> => {
+  return {
+    fn: (value: string) => (value ? value.length >= length : true),
+    message: `must be at most ${length} characters`,
+  };
 };
