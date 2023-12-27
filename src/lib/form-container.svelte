@@ -3,6 +3,7 @@
 	import { type Form } from "./form";
 
 	export let form: Form;
+	export let classes: string;
 
 	setContext(form.name, form);
 
@@ -12,6 +13,6 @@
 	};
 </script>
 
-<form on:submit={onSubmit}>
+<form on:submit={onSubmit} class={classes}>
 	<slot {form} />
 </form>
