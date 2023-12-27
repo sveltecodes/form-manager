@@ -1,5 +1,3 @@
-import "../app.pcss";
-
 export { default as FormContainer } from "./form-container.svelte";
 export { default as FormErrors } from "./form-errors.svelte";
 export { default as FormPasswordField } from "./form-password-field.svelte";
