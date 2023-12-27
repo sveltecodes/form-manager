@@ -8,4 +8,4 @@ export type { FormContextType } from "./form-context";
 export { FormError } from "./form-error";
 export { FormField } from "./form-field";
 export { email } from "./validators/email";
-export { minLength } from "./validators/min-length";
+export { minLength, maxLength } from "./validators/min-length";
