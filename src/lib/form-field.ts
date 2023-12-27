@@ -1,5 +1,7 @@
 import { BehaviorSubject } from "rxjs";
 import type { FormValidator } from "./form-validator";
+import { type SelectProps } from "bits-ui";
+import type { SelectOption } from "./types";
 
 export class FormField<T> {
 	public name: string;
@@ -7,7 +9,7 @@ export class FormField<T> {
 	public placeholder?: string;
 	public value?: BehaviorSubject<T>;
 	public touched?: boolean;
-	public control?: HTMLInputElement | HTMLSelectElement;
+	public control?: HTMLInputElement | SelectProps<SelectOption>;
 	public validators?: FormValidator<T>[] = [];
 	public errors? = new BehaviorSubject<string[]>([]);
 	public valid? = new BehaviorSubject<boolean>(false);
@@ -17,11 +19,15 @@ export class FormField<T> {
 		this.value = new BehaviorSubject<T>((field.value as any) || null);
 	}
 
-	public register?(control: HTMLInputElement | HTMLSelectElement): void {
+	public register?(control: HTMLInputElement | SelectProps<SelectOption>): void {
+		if (!(control instanceof HTMLInputElement)) {
+			return;
+		}
 		this.control = control;
-		this.control.addEventListener("change", () => {
-			this.value.next(this.control.value as any);
-			if (this.validate(this.control.value)) {
+		this.control.addEventListener("change", (v) => {
+			const value = (v.target as HTMLInputElement).value;
+			this.value.next(value as T); // Add type assertion
+			if (this.validate(value)) {
 				// this.value.next(this.control.value as any);
 			}
 		});

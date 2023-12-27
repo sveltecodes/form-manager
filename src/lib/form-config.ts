@@ -1,6 +1,6 @@
-import type { FormField } from "..";
+import type { FormField } from ".";
 
 export class FormConfig {
 	public name: string;
-	public fields: { [name: string]: FormField };
+	public fields: { [name: string]: FormField<unknown> };
 }

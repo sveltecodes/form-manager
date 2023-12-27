@@ -21,7 +21,7 @@ export class Form {
 		}
 	}
 
-	public register?<T>(name: string, control: HTMLInputElement | HTMLSelectElement): void {
+	public register?<T>(name: string, control: HTMLInputElement): void {
 		this.fields[name].control = control;
 		this.fields[name].register(control);
 		this.subscriptions.push(this.fields[name].valid.subscribe((e) => {}));
