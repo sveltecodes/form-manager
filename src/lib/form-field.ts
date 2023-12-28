@@ -9,7 +9,7 @@ export class FormField<T> {
 	public placeholder?: string;
 	public value?: BehaviorSubject<T>;
 	public touched?: boolean;
-	public control?: HTMLInputElement | SelectProps<SelectOption>;
+	public control?: HTMLInputElement | SelectProps<SelectOption> | HTMLTextAreaElement;
 	public validators?: FormValidator<T>[] = [];
 	public errors? = new BehaviorSubject<string[]>([]);
 	public valid? = new BehaviorSubject<boolean>(false);
@@ -19,12 +19,12 @@ export class FormField<T> {
 		this.value = new BehaviorSubject<T>((field.value as any) || null);
 	}
 
-	public register?(control: HTMLInputElement | SelectProps<SelectOption>): void {
-		if (!(control instanceof HTMLInputElement)) {
+	public register?(control: HTMLInputElement | SelectProps<SelectOption> | HTMLTextAreaElement): void {
+		if (!(control instanceof HTMLInputElement) && !(control instanceof HTMLTextAreaElement)) {
 			return;
 		}
 		this.control = control;
-		this.control.addEventListener("change", (v) => {
+		control.addEventListener("change", (v) => {
 			const value = (v.target as HTMLInputElement).value;
 			this.value.next(value as T); // Add type assertion
 			if (this.validate(value)) {

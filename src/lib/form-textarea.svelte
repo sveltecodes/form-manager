@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, onMount } from "svelte";
 	import { twMerge } from "tailwind-merge";
-	import type { HTMLInputAttributes, HTMLTextareaAttributes } from "svelte/elements";
+	import type { HTMLTextareaAttributes } from "svelte/elements";
 	import FieldError from "./field-error.svelte";
 	import type { Form } from "./form";
 	import type { FormContextType } from "./form-context";
@@ -37,4 +37,3 @@
 	class={twMerge("flex min-h-[60px] w-full rounded-md border border-gray-600 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50", $$props.class)}
 />
 <FieldError {errors} />
-

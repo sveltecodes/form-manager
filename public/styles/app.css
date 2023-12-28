@@ -838,10 +838,6 @@ video {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--primary) / var(--tw-bg-opacity));
 }
-.data-\[state\=unchecked\]\:bg-input[data-state=unchecked] {
-  --tw-bg-opacity: 1;
-  background-color: hsl(var(--input) / var(--tw-bg-opacity));
-}
 .data-\[state\=unchecked\]\:bg-gray-600[data-state=unchecked] {
   --tw-bg-opacity: 1;
   background-color: rgb(75 85 99 / var(--tw-bg-opacity));
