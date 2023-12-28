@@ -26,8 +26,9 @@ export class Form {
 		this.fields[name].register(control);
 		this.subscriptions.push(this.fields[name].valid.subscribe((e) => {}));
 		this.fields[name].value.subscribe((v) => {
-			this.values.next(this.submit());
+			this.values.next(this.combineValues());
 		});
+
 		this.fields[name].errors.subscribe((errors) => {
 			if (errors.length === 0) {
 				this.errors.next(null);
@@ -56,7 +57,8 @@ export class Form {
 		});
 	}
 
-	public submit(): KV {
+	// So we don't submit each time
+	private combineValues(): KV {
 		const values: KV = {};
 		combineLatest(Object.values(this.fields).map((field) => field.value))
 			.subscribe((v) => {
@@ -65,6 +67,26 @@ export class Form {
 				}
 			})
 			.unsubscribe();
+		return values;
+	}
+	public submit(): KV {
+		const values: KV = {};
+		const fields = Object.values(this.fields);
+		combineLatest(fields.map((field) => field.value)).subscribe((v) => {
+			for (const index in Object.values(this.fields)) {
+				const isRequired = fields[index].required;
+				const fieldValue = fields[index].value;
+
+				if (isRequired && !fieldValue.getValue()) {
+					const errors: string[] = [];
+
+					fields[index].errors.next(errors.concat("Required field"));
+				} else {
+					values[fields[index].name] = v[index];
+				}
+			}
+		});
+
 		return values;
 	}
 }

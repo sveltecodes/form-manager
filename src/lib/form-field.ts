@@ -13,6 +13,7 @@ export class FormField<T> {
 	public validators?: FormValidator<T>[] = [];
 	public errors? = new BehaviorSubject<string[]>([]);
 	public valid? = new BehaviorSubject<boolean>(false);
+	public required?: boolean = false;
 
 	public constructor(field: FormField<T>) {
 		Object.assign(this, field);
