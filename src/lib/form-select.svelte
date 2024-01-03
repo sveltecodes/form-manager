@@ -67,6 +67,7 @@
 	loop
 	bind:selected={bindedValue}
 	onSelectedChange={() => {
+		console.log("Selected value changed");
 		open.set(false);
 	}}
 	open={$open}
