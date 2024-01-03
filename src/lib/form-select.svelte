@@ -60,20 +60,16 @@
 			}
 		}
 	}
-	const open = writable(false);
 </script>
 
 <Select.Root
 	loop
 	bind:selected={bindedValue}
-	onSelectedChange={() => {
-		console.log("Selected value changed");
-		open.set(false);
+	onOpenChange={() => {
+		console.log("what");
 	}}
-	open={$open}
 >
 	<Select.Trigger
-		on:click={() => open.set(true)}
 		class="flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1"
 	>
 		<Select.Value {placeholder} aria-label={placeholder} />
