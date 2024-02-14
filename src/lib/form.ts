@@ -24,14 +24,18 @@ export class Form {
 	public register?<T>(name: string, control: HTMLInputElement): void {
 		this.fields[name].control = control;
 		this.fields[name].register(control);
-		this.subscriptions.push(this.fields[name].valid.subscribe((e) => { }));
+		this.subscriptions.push(this.fields[name].valid.subscribe((e) => {}));
 		this.fields[name].value.subscribe((v) => {
 			this.values.next(this.combineValues());
 		});
 
 		this.fields[name].errors.subscribe((errors) => {
 			if (errors.length === 0) {
-				this.errors.next(null);
+				// Remove the fields with f[name] only keep other (To preserve previous errors)
+				const remapped = this.errors.getValue().filter((f) => {
+					return f[name] ? false : true;
+				});
+				this.errors.next(remapped);
 				return;
 			}
 
