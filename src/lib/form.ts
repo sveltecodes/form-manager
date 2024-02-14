@@ -35,7 +35,11 @@ export class Form {
 				const remapped = this.errors.getValue().filter((f) => {
 					return f[name] ? false : true;
 				});
-				this.errors.next(remapped);
+				if (remapped.length > 0) {
+					this.errors.next(remapped);
+				} else {
+					this.errors.next(null);
+				}
 				return;
 			}
 
