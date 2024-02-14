@@ -4,14 +4,11 @@
 
 	export let form: Form;
 	export let classes: string;
+	export let onSubmit: (event: Event) => unknown
 
 	setContext(form.name, form);
 
-	const onSubmit = (e: Event) => {
-		e.preventDefault();
-		form.submit();
-	};
-</script>
+	</script>
 
 <form on:submit={onSubmit} class={classes}>
 	<slot {form} />
