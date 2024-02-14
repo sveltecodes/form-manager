@@ -4,7 +4,7 @@
 
 	export let form: Form;
 	export let classes: string;
-	export let onSubmit?: (event: Event) => unknown
+	export let onSubmit: (event: Event) => unknown
 
 	setContext(form.name, form);
 
