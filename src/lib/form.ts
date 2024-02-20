@@ -32,6 +32,7 @@ export class Form {
 		this.fields[name].errors.subscribe((errors) => {
 			if (errors.length === 0) {
 				// Remove the fields with f[name] only keep other (To preserve previous errors)
+				if (!this.errors.getValue()) return;
 				const remapped = this.errors.getValue().filter((f) => {
 					return f[name] ? false : true;
 				});
