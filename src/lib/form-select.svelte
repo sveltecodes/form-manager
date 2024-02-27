@@ -6,6 +6,7 @@
 	import { Form } from "./form";
 	import type { SelectOption } from "./types";
 	import { writable } from "svelte/store";
+	import FieldError from "./field-error.svelte";
 
 	let selectOptions: SelectOption[];
 	export { className as class };
@@ -60,6 +61,8 @@
 			}
 		}
 	}
+
+	$: errors = manager.fields[name].errors;
 </script>
 
 <Select.Root loop bind:selected={bindedValue}>
@@ -81,3 +84,5 @@
 		{/each}
 	</Select.Content>
 </Select.Root>
+
+<FieldError {errors} />
