@@ -5,7 +5,7 @@ import type { FormValidator } from "../form-validator";
 // 	message: "Invalid email address"
 // };
 
-export const mustEqaul = (v: any): FormValidator<any> => {
+export const mustEqual = (v: any): FormValidator<any> => {
 	return {
 		fn: (value: string) => (value == v),
 		message: `values must match`
