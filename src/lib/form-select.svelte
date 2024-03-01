@@ -8,7 +8,7 @@
 	import FieldError from "./field-error.svelte";
 
 	let selectOptions: SelectOption[];
-	export let defaultValue: Selected<SelectOption>
+	export let defaultValue: Selected<SelectOption> | undefined;
 	export { className as class };
 	export { selectOptions as options };
 
