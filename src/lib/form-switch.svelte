@@ -6,17 +6,10 @@
 	export { className as class };
 	export { selectOptions as options };
 
-	interface $$Props extends SwitchProps {
-		name: string;
-		placeholder: string;
-		manager: Form;
-		checked: boolean;
-	}
-
-	export let name: $$Props["name"];
-	export let manager: $$Props["manager"];
-	export let checked: $$Props["checked"];
-	export let placeholder: $$Props["placeholder"];
+	export let name: string;
+	export let manager: Form;
+	export let checked: boolean = false;
+	export let placeholder: string = null;
 
 	let control: SwitchProps;
 
