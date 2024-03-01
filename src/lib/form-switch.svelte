@@ -8,24 +8,24 @@
 
 	interface $$Props extends SwitchProps {
 		name: string;
+		placeholder: string;
 		manager: Form;
+		checked: boolean;
 	}
+
 	export let name: $$Props["name"];
 	export let manager: $$Props["manager"];
-	export let placeholder: string = "";
+	export let checked: $$Props["checked"];
+	export let placeholder: $$Props["placeholder"];
 
 	let control: SwitchProps;
+
 	const ctx = getContext<FormContextType<any>>(manager.name);
 
 	onMount(() => {
 		ctx.register(name, control);
-	});
-
-	let checked: boolean;
-	$: {
-		console.log(manager.fields[name]);
 		manager.fields[name].value.next(checked);
-	}
+	});
 </script>
 
 <Switch.Root
