@@ -3,6 +3,7 @@
 	"singleQuote": false,
 	"trailingComma": "none",
 	"printWidth": 300,
+	"bracketSameLine": true,
 	"overrides": [
 		{
 			"files": "*.svelte",
