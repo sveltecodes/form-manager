@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getContext, onMount } from "svelte";
-	import { twMerge } from "tailwind-merge";
 	import type { HTMLInputAttributes } from "svelte/elements";
+	import { twMerge } from "tailwind-merge";
 	import FieldError from "./field-error.svelte";
 	import type { Form } from "./form";
 	import type { FormContextType } from "./form-context";
@@ -14,7 +14,7 @@
 	}
 	export let name: $$Props["name"];
 	export let manager: $$Props["manager"];
-	export let value: string = "";
+	export let value: string = null;
 	export let placeholder: string = "";
 
 	let control: HTMLInputElement;
@@ -22,7 +22,7 @@
 	const ctx = getContext<FormContextType<any>>(manager.name);
 
 	onMount(() => {
-		ctx.register(name, control);
+		ctx.register(name, control, value);
 	});
 
 	$: errors = manager.fields[name].errors;

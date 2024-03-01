@@ -21,10 +21,15 @@ export class Form {
 		}
 	}
 
-	public register?<T>(name: string, control: HTMLInputElement): void {
+	public register<T>(name: string, control: HTMLInputElement, value?: any): void {
 		this.fields[name].control = control;
 		this.fields[name].register(control);
 		this.subscriptions.push(this.fields[name].valid.subscribe((e) => {}));
+
+		if(value) {
+			this.fields[name].value.next(value);
+		}
+
 		this.fields[name].value.subscribe((v) => {
 			this.values.next(this.combineValues());
 		});
