@@ -5,10 +5,10 @@
 	import type { FormContextType } from ".";
 	import { Form } from "./form";
 	import type { SelectOption } from "./types";
-	import { writable } from "svelte/store";
 	import FieldError from "./field-error.svelte";
 
 	let selectOptions: SelectOption[];
+	export let defaultValue: Selected<SelectOption>
 	export { className as class };
 	export { selectOptions as options };
 
@@ -16,6 +16,7 @@
 		name: string;
 		manager: Form;
 		options: SelectOption[];
+		defaultValue: Selected<SelectOption>
 	}
 	export let name: $$Props["name"];
 	export let manager: $$Props["manager"];
@@ -26,6 +27,9 @@
 
 	onMount(() => {
 		ctx.register(name, control);
+		if(defaultValue) {
+			bindedValue = defaultValue
+		}
 	});
 
 	let bindedValue: Selected<SelectOption>;
