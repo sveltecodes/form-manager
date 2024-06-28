@@ -1,4 +1,4 @@
-import type { FormValidator } from "../form-validator";
+import type { FormValidator } from "./form-validator";
 
 export const maxLength = (length: number): FormValidator<any> => {
 	return {

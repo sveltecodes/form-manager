@@ -1,4 +1,4 @@
-import type { FormValidator } from "../form-validator";
+import type { FormValidator } from "./form-validator";
 
 export const mustEqual = (v: any): FormValidator<any> => {
 	return {

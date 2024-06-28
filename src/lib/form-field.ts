@@ -1,7 +1,7 @@
 import { type SelectProps } from "bits-ui";
 import { BehaviorSubject } from "rxjs";
-import type { FormValidator } from "./form-validator";
 import type { SelectOption } from "./types";
+import type { FormValidator } from "./validators/form-validator";
 
 export class FormField<T> {
 	public name: string;

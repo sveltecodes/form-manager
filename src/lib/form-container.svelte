@@ -3,13 +3,11 @@
 	import { type Form } from "./form";
 
 	export let form: Form;
-	export let classes: string;
-	export let onSubmit: (event: Event) => unknown
+	export let onSubmit: (event: Event) => unknown;
 
 	setContext(form.name, form);
+</script>
 
-	</script>
-
-<form on:submit={onSubmit} class={classes}>
+<form on:submit={onSubmit} class={$$props.class}>
 	<slot {form} />
 </form>

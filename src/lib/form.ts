@@ -11,6 +11,7 @@ export class Form {
 	public errors? = new BehaviorSubject<{ [name: string]: FormError }[] | null>(null);
 	public submitted? = new Subject<{ [name: string]: string }>();
 	public values = new ReplaySubject<KV>(1);
+	public valid: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
 	private subscriptions: Subscription[] = [];
 
@@ -24,9 +25,9 @@ export class Form {
 	public register<T>(name: string, control: HTMLInputElement, value?: any): void {
 		this.fields[name].control = control;
 		this.fields[name].register(control);
-		this.subscriptions.push(this.fields[name].valid.subscribe((e) => {}));
+		this.subscriptions.push(this.fields[name].valid.subscribe((e) => { }));
 
-		if(value) {
+		if (value) {
 			this.fields[name].value.next(value);
 		}
 
@@ -36,6 +37,7 @@ export class Form {
 
 		this.fields[name].errors.subscribe((errors) => {
 			if (errors.length === 0) {
+				this.valid.next(true);
 				// Remove the fields with f[name] only keep other (To preserve previous errors)
 				if (!this.errors.getValue()) return;
 				const remapped = this.errors.getValue().filter((f) => {
@@ -49,6 +51,7 @@ export class Form {
 				return;
 			}
 
+			this.valid.next(false);
 			for (const error of errors) {
 				if (this.errors.getValue()) {
 					this.errors.next(
@@ -69,6 +72,14 @@ export class Form {
 				}
 			}
 		});
+
+		this.validate();
+	}
+
+	public validate(): void {
+		for (const field in this.fields) {
+			console.log(this.fields[field].name, this.fields[field].touched)
+		}
 	}
 
 	// So we don't submit each time
